@@ -1,47 +1,29 @@
-
-'''
-مبدأيا دكتورة احنا استخدمنا 90% من كل اشي شرحتية واعطيتينا اياه
-
-
-
-مرحبا
-احنا عملنا مشروع لشركة طيران خاصة
-(طائرات هاليكوبتر)
-وبتقدر خلال البرنامج الي احنا عملناه تفوت و تحجز تذكرتك بكل سهولة وبكل اريحية 
-وبس تخلص حجز راح نعرضلك شكل التذكرة الخاصة فيك 
-بكون موجود عليها:
-1-اسمك
-2-وقت الرحلة وتاريخ الرحلة
-3-تكلفة الرحلة
-4-المسافة الحقيقه التي سوق تقطعها بين المطارين بالكيلومتر
-(بتقدر تتأكد من خرائط جوجل عن المسافة وهتكون صح مية بالمية)
-'''
-from turtle import *#مكتبة الرسم
-import turtle#مكتبة لللاسم
-import time#مكتبة للمؤقت
-from math import*#مكتبة للرياضيات
-import os#مكتبة للحذف و انهاء الشاشه
-import datetime#مكتبة التاريخ و الوقت
-from geoip import geolite2#مكتبة لاحداثيات الجهاز
-import socket#مكتبة لاخراج ip الجهاز
+from turtle import
+import turtle
+import time
+from math import*
+import os#
+import datetime#
+from geoip import geolite2
+import socket
 
 os.system("color 30")
 class TTUairways:
-    ty=str#عشان اساوي فيها اسم المكان الي بدي انطلق منو و استعملو بعدين بالرسم
-    tu=str#عشان اساوي فيها اسم المكان الي بدي اهبط فيه و استعملو بعدين بالرسم
-    name=str#عشان الاسم
-    km=float#عشان افحص عدد الكيلو متر الي قطعها بين نقطتين
-    kmm=float#السعر للتذكره 
+    ty=str
+    tu=str
+    name=str
+    km=float
+    kmm=float
     wanted=['Sami Saad','Pablo Escobar','Shorouq Aleidi','Toqa Alzyood']
     
-    def title():#fun للعنوان و اضل استعملو دائما
+    def title():
         print("\t\t\t\t\t\tTTU airways")
-    def DrawWanted():#هاد الفنكشن عشان اذا كان واحد مطلوب نرجعلو ونطلعو الصفحه هاي ونمنعو من انو يوخد التذكرة
+    def DrawWanted():
         
         hostname=socket.gethostname()
         #126.53.24.5 
-        ip=socket.gethostbyname(hostname)#عشان اطلع IP الجهاز
-        locator=geolite2.lookup(ip)#عشان اطلع احداثيات و موقع الجهاز
+        ip=socket.gethostbyname(hostname)
+        locator=geolite2.lookup(ip)
 
         t = turtle.Turtle()
         screen = turtle.Screen()
@@ -138,10 +120,10 @@ class TTUairways:
         forward(20)
         left(90)
         Style=('arial',10)
-        dt = datetime.datetime.now()#داله لاخراج التاريخ لليوم كامل
-        dd=(int(dt.strftime('%d')))+2#داله لاخراج التاريخ باليوم و اضافه يومين عليه
-        dm=dt.strftime('%b')#داله لاخراج اسم الشهر
-        dy=(int(dt.strftime('%Y')))#داله لاخراج السنه
+        dt = datetime.datetime.now()
+        dd=(int(dt.strftime('%d')))+2
+        dm=dt.strftime('%b')
+        dy=(int(dt.strftime('%Y')))
         write(f"      {dy}-{dm}-{dd}",font=Style)
         write(f"                                                                       A12                               26B",font=Style)
         left(180)
@@ -166,8 +148,8 @@ class TTUairways:
         Style=('arial',8)
         write("                 Boarding time\n                 Heur d'embarquement",font=Style)
         Style=('arial',14)
-        dh=int(dt.strftime('%I'))#داله عشان اطلع الساعه الحاليه
-        da=dt.strftime('%p')#عشان نعرف اذا الوقت صباح او مساء
+        dh=int(dt.strftime('%I'))
+        da=dt.strftime('%p')
         write(f"                                       {dh}:00 {da}",font=Style)
         left(180)
         left(90)
@@ -245,7 +227,7 @@ class TTUairways:
         forward(600)
         right(270)
         forward(240)
-        #هسا هاد هون زي كأنو باركود عشان يعطي شكل للرسمه فقط لا غير
+       
         for i in range(5):
             left(270)
             Style=('arial',7)
@@ -268,7 +250,7 @@ class TTUairways:
         color('red')
         forward(20)
         Style=('arial',7)
-        write("     The distance traveled in kilometers",font=Style)#المسافه التي سوف قطعها المسافر بالكيلومتر
+        write("     The distance traveled in kilometers",font=Style)
         color('black')
         forward(15)
         Style=('arial',10)
@@ -364,13 +346,12 @@ class TTUairways:
         end_fill()
         done()
     def first():
-        TTUairways.title()#استدعاء العنوان
+        TTUairways.title()
         f=0
-        #هسا هون انا استعملت الوايل لوب عشان اعمل فاليديشن اذا المستخدم استعمل اي رقم غير الي انا محددلو اياهم يعملو اعادة عشان يحط الصح
         while f<1:
             x=int(input("Welcome\nwrite number 1 to inquire about who we are\nif you know who we are or have seen us now and want to register, type 2\nto exit, press 0 :"))
-            if x==1:#اذا اختار رقم 1 راح يدخل لصفحه جديده عشان اعطيه معلومات عن الشركه الخاصه فينا وكمان استعملت الفاليديشن هون
-                os.system('cls')#لحذف الشاشة
+            if x==1:
+                os.system('cls')
                 TTUairways.title()
                 f=f+1
                 print("Welcome\nWe worked for a private airline\n(helicopters)\nAnd during the program that we made, you can miss and book your tickets with ease and comfort\nOnce a reservation is made, we will show you the shape of your ticket\nBeing present on it:\nA-Your name\nB- Flight time and flight date\nC- The cost of the trip\nD- The actual distance traveled between the two airports in kilometers\n(You can check Google Maps for the distance and it will be 100% correct)")
@@ -388,7 +369,7 @@ class TTUairways:
                        c=c+1
                     else:
                         print("Please select one of the options",end="\t")
-            elif x==2:#اذا اختار رقم 2 راح يحولو لصفحه حجز التذكره و معلوماتها, وبهاي الصفحه راح نعرض اسماء المطارات الموجوده وبعدها بقدر يبلش يحجز
+            elif x==2:
                 f=f+1
                 os.system('cls')
                 TTUairways.title()
@@ -396,18 +377,18 @@ class TTUairways:
                 print("A-Airports located in the north :\n\t1-Military Hospital Airport(Irbid)\n\t2-JUST-Heliport(Irbid)\n\t3-Helipad (Mafraq)")
                 print("B-Airports located in the middle :\n\t4-Royal Jordanian AirCargo(Amman)\n\t5-Heliport(Amman)\n\t6-GEAA Heliport(Amman)\n\t7-Golden Eagle Aviation Academy(Amman)\n\t8-Anti extortion(Amman)\n\t9-Hospital Helipad(Amman)\n\t10-Jordan Hospital Airstrip(Amman)\n\t11-Amman Civil Airport(Amman)\n\t")
                 print("C-Airports located in the south : \n\t12-Helipad (Karak)\n\t13-Tafila University Airport(Tafila)\n\t14-King Hussein International Airport(Aqaba)")
-                TTUairways.coordinates()#هون استدعيت فنكشن الحجز كامل,راح تعرف معلومات عنو لما ننزل عليه
-            elif x==0:#اذا اختار صفر راح يطلع بره البرنامج
+                TTUairways.coordinates()
+            elif x==0:
                 f=f+1
                 os.system('cls')
                 TTUairways.title()
                 print("\t\t\t    Thank you for using website, click anything to exit")
-            else:#اذا اختار خيار غير الي احنا عارضينهم بالخطأ راح نعملو انو يعيد الاختيار عشان بشكل صحيح
+            else:
                 os.system('cls')
                 TTUairways.title()
                 print("please try again")
-    def coordinates():#فنكشن الحجز للرحلات
-        #هدول احداثيات الاماكن على الخريطه بالضبط
+    def coordinates():
+       
         o1=[32.50492765775706, 35.86503354312493]
         o2=[32.494321210944264, 35.989580977206096]
         o3=[32.265584624180114, 36.45530283125569]
@@ -424,7 +405,7 @@ class TTUairways:
         o14=[29.609248127247092, 35.020857775230226]
 
         x=0
-        while x<1:#هون عملنا فاليديشن عشان لما يدخل الاسم الاول يدخل الاسم صحيح بدون اي ارقام او رموز خاصه
+        while x<1:
             v=0
             fname=str(input("first name : "))
             for i in fname:
@@ -437,7 +418,7 @@ class TTUairways:
                 x+=1
 
         c=0
-        while c<1:#هون عملنا فاليديشن عشان لما يدخل الاسم الثاني يدخل الاسم صحيح بدون اي ارقام او رموز خاصه
+        while c<1:
             v=0
             lname=str(input("last name : "))
             for i in lname:
@@ -448,12 +429,13 @@ class TTUairways:
             elif v==0:
                 c+=1
 
-        TTUairways.name=fname.title()+" "+lname.title()#استعملنا هون هاي الدالة عشان نحول اول حرف بالاسم لكابيتل دائما title()
+        TTUairways.name=fname.title()+" "+lname.title()
+        title()
 
    
         a=0
         while a<1:
-            q=float(input("Enter the place of departure number : "))#رقم المنطقه الي بدي اطلع منها
+            q=float(input("Enter the place of departure number : "))
 
             if q==1:
                 q=o1
@@ -519,7 +501,7 @@ class TTUairways:
 
         a=0
         while a<1:
-            w=int(input("Enter the landing place number : "))#رقم المنطقه الي بدي اهبط فيها
+            w=int(input("Enter the landing place number : "))
             if w==1:
                 w=o1
                 TTUairways.tu="Military Hospital Airport(Irbid)"
@@ -588,29 +570,26 @@ class TTUairways:
         a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
         c = 2 * asin(sqrt(a))
         r = 6371
-        TTUairways.km=format(c*r,".2f")#المسافه بين نقطتين بالكيلو متر
-        TTUairways.kmm=format(c*r*0.40,".2f")#قيمه التذكره
+        TTUairways.km=format(c*r,".2f")
+        TTUairways.kmm=format(c*r*0.40,".2f")
         #هون بتنتهي المعادله
         os.system('cls')
         TTUairways.title()
         print("\n\n\n*************************************  Now your flight ticket will be processed  ***************************************")
-        time.sleep(5)#مؤقت عشان يعرف المستخدم انو حاليا في تذكره وقاعده بتجهز
-        for i in range(0,len(TTUairways.wanted)):#عشان يعمل لوب لعدد الاسامي الموجودين بالليست
-            if TTUairways.name==TTUairways.wanted[i]:#اذا كان الاسم الي دخلو بيساوي واحد من الاسامي الموجودين بالليست تبع المطلوبين
-                TTUairways.DrawWanted()#راح نستدعي الصفحه الي بتعرضلو انو هوه مطلوب
+        time.sleep(5)
+        for i in range(0,len(TTUairways.wanted)):
+            if TTUairways.name==TTUairways.wanted[i]:
+                TTUairways.DrawWanted()
                 os.system('cls')
                 TTUairways.title()
                 print("\n\n\n*************************************  An error occurred, you are Wanted  ***************************************")
 
                 break
         else:
-                TTUairways.draw()#استدعيت فنكشن الرسم عشان يعرضلي شكل التذكره
+                TTUairways.draw()
                 os.system('cls')
                 TTUairways.title()
                 print("\n\n\n*************************************  Your flight ticket has been designed  ***************************************")
     
-opj=TTUairways#عرفنا اوبجيكت
-opj.first()#استدعينا فنكشن فيرست
-
-
-
+opj=TTUairways
+opj.first()
